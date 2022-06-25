@@ -1,97 +1,157 @@
-/* 
-You are given two integer arrays nums1 and nums2, sorted in non-decreasing order,
- and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+// Q2
+// var twoSum = function(nums , target) {
+//     for(let i=0 ; i<nums.length ; i++)
+//     {
+//         if(nums[i]+nums[i+1] == target)
+//         {
+//             console.log([i,i+1]);
+//             break;
+//         }
+//     }
+// };
+// twoSum([2,7,11,15],9);
 
-Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+// Q4
+// var searchRange = function(nums, target) {
+//     var arr =[-1,-1];
+//     var counter =0 ;
+//     for(var i = 0 ; i < nums.length ; i++ )
+//     {
+//         if(nums[i] == target && nums.length==1)
+//         {
+//             arr=[0,0];
+//         }
+//         else if(nums[i] == target)
+//         {
+//             arr=[...arr,i];
+//         }
+//     }
+//     if(arr.length > 2)
+//     {
+//         arr = arr.filter(el => el != -1)
+//         if(arr.length ==1)
+//         {
+//             arr=[...arr,arr[0]];
+//         }
+//         else if(arr.length > 2)
+//         {
+//             arr=[arr[0],arr[arr.length-1]];
+//         }
+//     }
+//     console.log(arr);
+// };
 
-The final sorted array should not be returned by the function, but instead be stored inside the array nums1.
- To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged,
- and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+// searchRange([3,3,3,3,3,3,3],3);
 
-Example 1:
+// Q5
+// var strStr = function(haystack, needle) {
+//     console.log(haystack.indexOf(needle));
+// };
 
-Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
-Output: [1,2,2,3,5,6]
-Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
-The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
-Example 2:
+// strStr("aaaaa","");
 
-Input: nums1 = [1], m = 1, nums2 = [], n = 0
-Output: [1]
-Explanation: The arrays we are merging are [1] and [].
-The result of the merge is [1].
-Example 3:
+//Q6
+// var longestCommonSubsequence = function(text1, text2) {
+//     const table = Array.from({length:text1.length+1},()=> new Array(text2.length+1).fill(''));
+//     for(var i =1; i<table.length;i++)
+//     {
+//         for(var j =1 ;j<table[i].length ; j++)
+//         {
+            
+//             if(text1[i-1]==text2[j-1])
+//             {
+//                 table[i][j]=table[i-1][j-1]+text1[i-1]; 
+//             }
+//             else{
+//                 let above = table[i-1][j];
+//                 let left = table[i][j-1];
 
-Input: nums1 = [0], m = 0, nums2 = [1], n = 1
-Output: [1]
-Explanation: The arrays we are merging are [] and [1].
-The result of the merge is [1].
-Note that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.
+//                 table[i][j] = above.length > left.length ? above : left;
+//             }
+//         }
+//     }
+//     return table[text1.length][text2.length].length;
+// };
+// longestCommonSubsequence('abc' , 'def');
 
-
-*/
-
-// Solution
-
-var arr1 =[1,2,3,0,0,0];
-var arr2 =[2,5,6];
-
-var Arr1 =[1];
-var Arr2 =[];
-
-var Arr_1 =[0];
-var Arr_2 =[1];
-
-function merge(nums1,nums2)
-{
-    document.getElementById('result').innerHTML += 
-    `<p> first array : [${nums1}] </p>
-    <p> second array : [${nums2}] </p>
-    `;
-    nums1 = nums1.filter((el) => el != 0);
-    nums1.sort();
-    nums2 = nums2.filter((el) => el != 0);
-    nums2.sort();
-    nums1=[...nums1,...nums2].sort();
-    m = nums1.length; //m+n
-    nums2=[];
-    n = nums2.length; //0 empty array
-    // console.log(nums1);
-    document.getElementById('result').innerHTML += 
-    `<p> Ruslt Function array : [${nums1}] </p>
-    <hr>
-    `;
-}
-
-merge(arr1,arr2);
-merge(Arr1,Arr2);
-merge(Arr_1,Arr_2);
-
-var merge = function(nums1, m, nums2, n) {
-    let f = m-1;
-    let s = n-1;
-    let i = m + n - 1;
+//Q7
+// var isAnagram = function(s, t) {
+//     s=s.split('');
+//     s=s.sort();
+//     s=s.join('');
+//     t=t.split('');
+//     t=t.sort();
+//     t=t.join('');
     
-    while( s >= 0 )
-    {
-        let Vfirst = nums1[f];
-        let Vsecond = nums2[s];
-        
-        if(Vsecond < Vfirst)
-        {
-            nums1[i] = Vfirst;
-            f--;
-            i--;
+//     return s==t ? true : false
+// };
+// console.log(isAnagram('aefddf','ffddea'));
+
+//Q8
+// var relativeSortArray = function(arr1, arr2) {
+//     var temp = [];
+//     arr2.forEach(element => {
+//         temp = [...temp ,...arr1.filter(el => el == element)];
+//     });
+    
+//     // console.log(arr1.filter(el => !arr2.includes(el)));
+
+//     return temp = [...temp,...arr1.filter(el => !arr2.includes(el))];
+// };
+// relativeSortArray([2,3,1,3,2,4,6,7,9,2,19],[2,1,4,3,9,6]);
+
+// technical Assessment
+
+// function computeClosestToZero (ts){
+//     tempretures = differences(ts);
+//     tempretures.sort((a , b) => a.val-b.val);
+//     let closestToZero = tempretures[0];
+//     closestToZero.typ == 'p' ? console.log(closestToZero.val):console.log(-closestToZero.val);
+// }
+
+// const differences = (t) => {
+//     return t.map(el =>{
+//         if(el > 0){
+//             return {val: Math.abs(el),typ: 'p'}
+//         }
+//         else{
+//             return {val: Math.abs(el),typ: 'n'}
+//         }
+//     });
+// }
+
+// computeClosestToZero([20,30,20,-1,-3]);
+
+
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
+var addTwoNumbers = function(l1, l2) {
+    let carry = 0;
+    let previuosNode = new ListNode();
+    const headNode = previuosNode;
+    while(l1 || l2){
+        let v1 = 0;
+        let v2 = 0;
+        if(l1){
+            v1 = l1.val;
+            l1 = l1.next;
         }
-        else{
-            nums1[i] = Vsecond;
-            s--;
-            i--;
+        if(l2){
+            v2 = l2.val;
+            l2 = l2.next;
         }
-    }
-    console.log(nums1);
-        
-};
-merge(arr1,3,arr2,3);
-merge(Arr1,1,Arr2,0);
-merge(Arr_1,0,Arr_2,1);
+        const sum = v1 + v2 + carry;
+        carry = Math.floor(sum/10);
+        const digit = sum % 10;
+        // console.log(`${v1}`);
+        const currentNode = new ListNode(digit);
+        previuosNode.next = currentNode;
+        previuosNode = currentNode;
+    }  
+    console.log(headNode.next);
+  };
+  addTwoNumbers([1,3,6],[4,2,2]);
+
+
